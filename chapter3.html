@@ -1,0 +1,26 @@
+<html>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="main.js"></script>
+<script>
+$(function(){
+  var myWikipedia = new MyWikipediaAPI('data/jawiki-country.json');
+  myWikipedia.getData.done(function(_data) {
+    var list = _data.split("\n");
+    for (var i = 0; i < list.length; i++) {
+      if(list[i] != ""){
+        var t = JSON.parse(list[i]);
+        this.shaping(t);
+      }
+    }
+    console.log(this.datas["イギリス"]);
+    myWikipedia.getFlagImg("イギリス").done(function(_data) {
+      for (var id in _data.query.pages) {
+        console.log(_data.query.pages[id].imageinfo[0].url);
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
